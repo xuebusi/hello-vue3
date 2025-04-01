@@ -2,10 +2,18 @@
   <div class="app">
     <TheNavbar />
     <main class="main">
-      <router-view />
+      <div class="container">
+        <router-view v-slot="{ Component }">
+          <transition name="fade" mode="out-in">
+            <component :is="Component" />
+          </transition>
+        </router-view>
+      </div>
     </main>
     <footer class="footer">
-      <!-- 页脚内容 -->
+      <div class="container">
+        <p>© 2024 公司名称. 保留所有权利</p>
+      </div>
     </footer>
   </div>
 </template>
@@ -16,7 +24,6 @@ import TheNavbar from '@/components/TheNavbar.vue'
 
 <style lang="scss">
 @use '@/assets/styles/variables.scss' as *;
-@use '@/assets/styles/global.scss';
 
 .app {
   min-height: 100vh;
@@ -26,5 +33,32 @@ import TheNavbar from '@/components/TheNavbar.vue'
 
 .main {
   flex: 1;
+  padding: $spacing-xl 0;
+  background-color: $bg-primary;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $spacing-md;
+}
+
+.footer {
+  padding: $spacing-md 0;
+  text-align: center;
+  background-color: darken-color($bg-primary, 5%);
+  color: $text-secondary;
+}
+
+/* 页面过渡动画 */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

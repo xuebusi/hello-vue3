@@ -1,3 +1,5 @@
+@use "sass:color"; // 添加这行导入color模块
+
 // 颜色变量
 $primary-color: #409EFF;
 $bg-primary: #ffffff;
@@ -16,3 +18,12 @@ $spacing-xl: 32px;
 $border-radius-sm: 4px;
 $border-radius-md: 8px;
 $box-shadow-sm: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+
+// 颜色调整函数
+@function darken-color($color, $amount) {
+    @return color.scale($color, $lightness: -$amount);
+}
+
+@function lighten-color($color, $amount) {
+    @return color.scale($color, $lightness: $amount);
+}
